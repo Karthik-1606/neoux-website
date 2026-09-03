@@ -1,0 +1,47 @@
+{% extends "portal/base.html" %}
+{% block title %}{{ project.title }}{% endblock %}
+{% block body %}
+<div class="topbar">
+  <div class="brand">ClientDesk<span>{{ project.client.company_name }}</span></div>
+  <a class="logout" href="{% url 'logout' %}">Log out</a>
+</div>
+
+<div class="wrap">
+  <a class="back-link" href="{% url 'dashboard' %}">← Back to projects</a>
+  <div class="top-row" style="margin-top:10px;">
+    <h2 style="margin:0;">{{ project.title }}</h2>
+    <span class="badge status-{{ project.status }}">{{ project.get_status_display }}</span>
+  </div>
+  <p class="desc">{{ project.description }}</p>
+  <div class="meter"><i style="width:{{ project.progress_percent }}%"></i></div>
+  <div class="meter-label">{{ project.progress_percent }}% complete</div>
+
+  <h2>Updates</h2>
+  {% if project.updates.all %}
+    <div class="update-list">
+      {% for u in project.updates.all %}
+      <div class="update-item">
+        <div class="update-date">{{ u.created_at|date:"d M Y, h:i A" }}</div>
+        <p>{{ u.note }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">No updates posted yet.</p>
+  {% endif %}
+
+  <h2>Documents</h2>
+  {% if project.documents.all %}
+    <div class="doc-list">
+      {% for d in project.documents.all %}
+      <a class="doc-item" href="{{ d.file.url }}" target="_blank">
+        <span>{{ d.label }}</span>
+        <span class="doc-date">{{ d.uploaded_at|date:"d M Y" }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">No documents uploaded yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

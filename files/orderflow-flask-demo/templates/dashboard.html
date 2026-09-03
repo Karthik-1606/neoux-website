@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+<div class="topbar">
+  <div class="brand">OrderFlow<span>admin</span></div>
+  <a class="logout" href="{{ url_for('logout') }}">Log out</a>
+</div>
+
+<div class="wrap">
+  <div class="stats-row">
+    <div class="stat"><div class="n">{{ stats.total_orders }}</div><div class="l">Total orders</div></div>
+    <div class="stat"><div class="n">{{ stats.pending }}</div><div class="l">Pending</div></div>
+    <div class="stat"><div class="n">{{ stats.shipped }}</div><div class="l">Shipped</div></div>
+    <div class="stat"><div class="n">₹{{ "%.0f"|format(stats.revenue) }}</div><div class="l">Order value</div></div>
+  </div>
+
+  <h2>Orders</h2>
+  <table class="orders-table">
+    <thead>
+      <tr><th>ID</th><th>Customer</th><th>Product</th><th>Qty</th><th>Status</th><th>Placed</th><th>Update</th></tr>
+    </thead>
+    <tbody>
+      {% for o in orders %}
+      <tr>
+        <td>#{{ o.id }}</td>
+        <td>{{ o.customer_name }}</td>
+        <td>{{ o.product.name if o.product else "—" }}</td>
+        <td>{{ o.quantity }}</td>
+        <td><span class="badge status-{{ o.status }}">{{ o.status }}</span></td>
+        <td>{{ o.created_at.strftime("%d %b %Y") }}</td>
+        <td>
+          <form method="POST" action="{{ url_for('update_status', order_id=o.id) }}">
+            <select name="status" onchange="this.form.submit()">
+              {% for s in ["pending","processing","shipped","delivered","cancelled"] %}
+              <option value="{{ s }}" {% if o.status == s %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Products</h2>
+  <table class="orders-table">
+    <thead><tr><th>SKU</th><th>Name</th><th>Price</th><th>Stock</th></tr></thead>
+    <tbody>
+      {% for p in products %}
+      <tr><td>{{ p.sku }}</td><td>{{ p.name }}</td><td>₹{{ "%.0f"|format(p.price) }}</td><td>{{ p.stock }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>API endpoints</h2>
+  <div class="api-list">
+    <code>GET  /api/orders</code>
+    <code>POST /api/orders</code>
+    <code>GET  /api/orders/&lt;id&gt;</code>
+    <code>PUT  /api/orders/&lt;id&gt;</code>
+    <code>DELETE /api/orders/&lt;id&gt;</code>
+    <code>GET  /api/products</code>
+    <code>POST /api/products</code>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "portal/base.html" %}
+{% block title %}Client login{% endblock %}
+{% block body %}
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="brand">ClientDesk<span>Django client portal demo</span></div>
+    <p class="tag">Auth · Project tracking · Document uploads · Admin CMS</p>
+
+    {% if form.errors %}
+      <div class="flash">Invalid username or password.</div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <label>Username</label>
+      <input type="text" name="username" placeholder="client1" required>
+      <label>Password</label>
+      <input type="password" name="password" placeholder="••••••••" required>
+      <button type="submit">Sign in</button>
+    </form>
+    <div class="demo-note">
+      Demo client login — username: <b>client1</b> · password: <b>clientdesk2026</b><br>
+      Staff / CMS admin: <a href="/admin/">/admin/</a> — username: <b>admin</b> · password: <b>clientdesk2026</b>
+    </div>
+  </div>
+</div>
+{% endblock %}

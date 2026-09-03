@@ -1,0 +1,50 @@
+:root{
+  --bg:#0B1729; --panel:#101F36; --line:#1E3049; --copper:#C97A4A;
+  --txt:#EAF0F6; --muted:#8FA3BD; --ok:#3EBD84; --warn:#E0A93E; --bad:#E0623E;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--txt);}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 24px 80px;}
+
+/* login */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+.login-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:36px;width:100%;max-width:380px;}
+.login-card .brand{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;}
+.login-card .brand span{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:4px;}
+.login-card .tag{color:var(--muted);font-size:13px;margin:6px 0 22px;}
+.login-card label{display:block;font-size:12px;color:var(--muted);margin:14px 0 6px;}
+.login-card input{width:100%;padding:11px 12px;border-radius:8px;border:1px solid var(--line);background:#0C1A2E;color:var(--txt);font-size:14px;}
+.login-card button{width:100%;margin-top:22px;padding:12px;border:none;border-radius:8px;background:var(--copper);color:#0B1729;font-weight:700;cursor:pointer;font-size:14px;}
+.login-card button:hover{opacity:.9;}
+.demo-note{margin-top:16px;font-size:12px;color:var(--muted);}
+.flash{background:rgba(224,98,62,.15);color:var(--bad);padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:6px;}
+
+/* dashboard */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--line);}
+.topbar .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
+.topbar .brand span{color:var(--copper);font-size:12px;margin-left:8px;font-weight:600;}
+.topbar .logout{color:var(--muted);text-decoration:none;font-size:13px;}
+.topbar .logout:hover{color:var(--txt);}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;}
+.stat .n{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--copper);}
+.stat .l{font-size:12px;color:var(--muted);margin-top:4px;}
+
+h2{font-family:'Space Grotesk',sans-serif;font-size:18px;margin:36px 0 14px;}
+
+.orders-table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.orders-table th,.orders-table td{padding:11px 14px;text-align:left;font-size:13px;border-bottom:1px solid var(--line);}
+.orders-table th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;}
+.orders-table tr:last-child td{border-bottom:none;}
+.orders-table select{background:#0C1A2E;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:12px;}
+
+.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:capitalize;}
+.status-pending{background:rgba(224,169,62,.15);color:var(--warn);}
+.status-processing{background:rgba(94,150,224,.15);color:#5E96E0;}
+.status-shipped{background:rgba(62,189,132,.15);color:var(--ok);}
+.status-delivered{background:rgba(62,189,132,.25);color:var(--ok);}
+.status-cancelled{background:rgba(224,98,62,.15);color:var(--bad);}
+
+.api-list{display:flex;flex-direction:column;gap:8px;}
+.api-list code{background:var(--panel);border:1px solid var(--line);padding:9px 12px;border-radius:8px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--copper);}
